@@ -1,0 +1,55 @@
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+Example:
+
+Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+Output: 7 -> 0 -> 8
+Explanation: 342 + 465 = 807.
+
+
+Solution:
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        
+        s1 = s2 = ""
+        while l1 is not None:
+            s1 = s1 + str(l1.val)
+            l1 = l1.next
+            
+        while l2 is not None:
+            s2 = s2 + str(l2.val)
+            l2 = l2.next
+            
+        revs1 = s1[::-1]
+        revs2 = s2[::-1]
+        
+        sum_nos = int(revs1) + int(revs2)
+        
+        # Now convert this to a LL
+        
+        n = len(str(sum_nos))
+        
+        rev_sum = str(sum_nos)[::-1]
+        
+        l3 = curr = ListNode(0)
+        
+        for x in range(n):
+            curr.next = ListNode(rev_sum[x])
+            curr = curr.next
+        
+        return l3.next
+        
+        
+ Details:
+ 
+ Instead of traversing to the end and adding up on the fly, I thought we could just convert them into numbers and add them up
+ 
+ Runtime: 76 ms, faster than 43.66% of Python3 online submissions for Add Two Numbers.
