@@ -1,0 +1,36 @@
+Given a string, find the length of the longest substring without repeating characters.
+Input: "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3. 
+             Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
+             
+             
+             
+ Solution:
+ 
+ class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if len(s) == 0:
+            return 0
+        if len(s) == 1:
+            return 1
+        
+        maxlen = 1
+        for x in range(len(s)):
+            l1 = []
+            l1.append(s[x])
+            for y in range(x+1,len(s),1):
+                if s[y] not in l1:
+                    l1.append(s[y])
+                    maxlen = max(maxlen,len(l1))
+                else:
+                    break
+        
+        return maxlen
+        
+        
+Details:
+
+If I wanted to check the unique characters I couldve used a set but I had to check the consecutive string so used 2 for loops.
+I can also do it with one while loop but essentially I would be doing the same thing
+I can just check with in if the element is present in the list.
